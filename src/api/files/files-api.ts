@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 
 import type { FileDto } from './files-dtos.ts';
 import type { GetFilesParams } from './files-params-types.ts';
+import { withTreeSearch } from './utils/with-tree-search/withTreeSearch.ts';
 
 faker.seed(0);
 
@@ -32,23 +33,6 @@ function generateChildren(): FileDto[] | undefined {
       }),
     },
   );
-}
-
-function withTreeSearch(initialData: FileDto[], search: string): FileDto[] {
-  return initialData.filter((child) => {
-    if (child.name.includes(search)) return true;
-
-    if (child.children) {
-      const foundInChildren = withTreeSearch(child.children, search);
-
-      if (foundInChildren?.length) {
-        child.children = foundInChildren;
-        return true;
-      }
-    }
-
-    return false;
-  });
 }
 
 const filesData = Array.from({ length: 10 })
