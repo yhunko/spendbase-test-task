@@ -1,30 +1,27 @@
-# React + TypeScript + Vite
+# React (SWC) + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technologies
 
-Currently, two official plugins are available:
+### Main tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React
+- TailwindCSS
+- @tanstack/react-query
 
-## Expanding the ESLint configuration
+### Unit Testing:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Vitest
 
-- Configure the top-level `parserOptions` property like this:
+### Tools
+- Prettier
+- ESLint
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Architecture design
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Based on [Feature sliced design (FSD)](https://feature-sliced.design/)
+
+## Key task points
+
+- Decided to go with minimalist approach - HTML native components + Tailwind styling. Basically the same could be done with Material UI or any other UI kit without any trouble. But for small (and not only) CSS styling I prefer to use Tailwind with handy conditional styling (`className={clsx('flex flex-row', isMobile && 'flex-col')}`)
+- For drag and drop / sort support it's better to use [DnD Kit](https://docs.dndkit.com/presets/sortable) in my opinion, but requires investigation regarding the implementation for tree view structure, which will require more than 2 days for me right now.
+- As for performance optimisations for very large datasets I would go with virtual scroll. Since it's better to have fixed width and height for the list to avoid UI jumps, it's very good opportunity for virtualization implementation, since it requires fixed height in order to calculate the render offset properly.
