@@ -20,5 +20,10 @@ module.exports = {
       {allowConstantExport: true},
     ],
     "unicorn/filename-case": "off",
+    '@typescript-eslint/consistent-type-definitions': [
+      'warn',
+      'type'
+    ],
+    'unicorn/prevent-abbreviations': 'off'
   },
 }
